@@ -25,7 +25,9 @@ class GroupPage(QWidget):
         layout.addWidget(self.lbl)
 
         self.list_docs = DocumentListWidget()
-        layout.addWidget(self.list_docs)
+        layout.addWidget(self.list_docs) 
+        
+        self.list_docs.filesChanged.connect(self._on_files_changed)
 
         # Botones
         self.btn_auto = QPushButton("Agrupar automáticamente")
@@ -67,11 +69,7 @@ class GroupPage(QWidget):
                 self.list_docs.add_file_item(f)  # esto disparará filesChanged
 
     def _on_files_changed(self, paths):
-        """
-        paths: lista de rutas absolutas de DocumentListWidget
-        Construimos self.docs como [(folder_name, file_path), ...]
-        y habilitamos/deshabilitamos botones.
-        """
+
         def to_pair(path):
             return (os.path.basename(os.path.dirname(path)), path)
 
@@ -98,10 +96,18 @@ class GroupPage(QWidget):
 
     def on_finished(self, ok: bool, out_dir: str):
         if ok:
-            self.lbl.setText(f"✅ Documentos agrupados con éxito\nCarpeta: {out_dir}")
+            self.lbl.setText(f" Documentos agrupados con éxito ✅")
         else:
             self.lbl.setText("❌ Ocurrió un error durante el procesamiento")
         self.progress.hide()
 
     def open_params(self):
         self.controller.open_parameters_dialog()
+        
+    def _on_files_changed(self, paths):
+        import os
+        def to_pair(p): return (os.path.basename(os.path.dirname(p)), p)
+        self.docs = [to_pair(p) for p in paths]
+        has_docs = bool(self.docs)
+        self.btn_auto.setEnabled(has_docs)
+        self.btn_params.setEnabled(has_docs)
