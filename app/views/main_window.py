@@ -117,11 +117,11 @@ class MainWindow(QWidget):
         self.btn_train = QPushButton("Entrenar Modelo")
         #self.btn_train.setIcon(icon_btnClasificar)
         
-        self.btn_ver = QPushButton("Ver modelos")
-        self.btn_ver.setIcon(icon_btnVer)
+        self.btn_models_overview = QPushButton("Ver modelos")
+        self.btn_models_overview.setIcon(icon_btnVer)
        
 
-        for btn in [self.btn_home, self.btn_group, self.btn_classify, self.btn_train, self.btn_ver]:
+        for btn in [self.btn_home, self.btn_group, self.btn_classify, self.btn_train, self.btn_models_overview]:
             btn.setStyleSheet(Styles.BUTTON_HOME)
             btn.setIconSize(Styles.ICON_MEDIUM_SIZE)
             sidebar_layout.addWidget(btn)

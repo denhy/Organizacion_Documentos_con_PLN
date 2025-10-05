@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 import torch
 
-_model = None  # <-- variable global privada
+_model = None  
 
 def get_model():
     global _model

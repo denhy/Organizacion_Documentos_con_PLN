@@ -10,7 +10,7 @@ from PyQt5.QtGui import QPixmap, QIcon, QFont, QCursor
 from app.utils.styles import Styles
 
 class DocumentListWidget(QWidget):
-    filesChanged = pyqtSignal(list)  # rutas absolutas
+    filesChanged = pyqtSignal(list)  
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -31,8 +31,9 @@ class DocumentListWidget(QWidget):
         self.btn_add_files = QPushButton("Agregar archivos")
         self.btn_add_folder = QPushButton("Agregar carpeta")
         for b in (self.btn_add_files, self.btn_add_folder):
-            b.setStyleSheet(Styles.BUTTON_VIEWS)
-            b.setFixedHeight(34)
+            b.setStyleSheet(Styles.BUTTON_FILES)
+            b.setFixedHeight(44) 
+           
         self.btn_add_files.clicked.connect(self._add_files_dialog)
         self.btn_add_folder.clicked.connect(self._add_folder_dialog)
         actions.addWidget(self.btn_add_files)

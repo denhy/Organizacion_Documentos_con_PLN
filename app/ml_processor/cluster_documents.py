@@ -17,7 +17,7 @@ class ClusterDocuments:
             random_state=42
         )
         self.hdbscan = HDBSCAN(
-            min_cluster_size=5,
+            min_cluster_size=2,
             min_samples=2,
             cluster_selection_epsilon=0.1
         )

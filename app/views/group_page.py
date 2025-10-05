@@ -11,7 +11,7 @@ class GroupPage(QWidget):
     def __init__(self, controller):
         super().__init__()
         self.controller = controller
-        self.docs = []  # [(folder_name, file_path)]
+        self.docs = []  
         self.setup_ui()
         self._wire_signals()
 
@@ -50,10 +50,7 @@ class GroupPage(QWidget):
         self.progress.setValue(0)
         self.progress.hide()
         layout.addWidget(self.progress)
-
         layout.addStretch()
-
-        # <<< NUEVO: reaccionar cuando cambian los archivos en la lista >>>
         self.list_docs.filesChanged.connect(self._on_files_changed)
 
     def _wire_signals(self):
@@ -61,7 +58,7 @@ class GroupPage(QWidget):
         self.controller.status_changed.connect(self.update_status)
         self.controller.finished.connect(self.on_finished)
 
-    # Si aún quieres conservar el diálogo manual:
+
     def upload_docs(self):
         files, _ = self.controller.get_files_dialog()
         if files:

@@ -11,7 +11,8 @@ from PyQt5.QtCore import Qt
 from .views.main_window import MainWindow
 from .views.group_page import GroupPage
 from .views.classify_page import ClassifyPage
-from .views.train_model_page import TrainModel
+from .views.train_model_page import TrainPage
+from .views.models_overview_page import ModelResultsPage
 from .controllers.ml_controller import MLController
 
 def main():
@@ -47,19 +48,22 @@ def main():
     
     group_page = GroupPage(ml_controller)
     classify_page = ClassifyPage(ml_controller)
-    train_page = TrainModel(ml_controller)
+    train_page = TrainPage(ml_controller)
+    models_overview = ModelResultsPage()
     
     # Agregar páginas al stack
     main_window.add_page(home_widget, 0)
     main_window.add_page(group_page, 1)
     main_window.add_page(classify_page, 2)
     main_window.add_page(train_page, 3)
+    main_window.add_page(models_overview, 4)
     
     # Conectar botones del menú
     main_window.btn_home.clicked.connect(lambda: main_window.set_current_page(0))
     main_window.btn_group.clicked.connect(lambda: main_window.set_current_page(1))
     main_window.btn_classify.clicked.connect(lambda: main_window.set_current_page(2))
     main_window.btn_train.clicked.connect(lambda: main_window.set_current_page(3))
+    main_window.btn_models_overview.clicked.connect(lambda: main_window.set_current_page(4))
     
     main_window.show()
     sys.exit(app.exec_())
