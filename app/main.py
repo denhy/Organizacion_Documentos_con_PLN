@@ -8,35 +8,34 @@ QApplication, QWidget, QVBoxLayout, QPushButton, QLabel,
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtCore import Qt 
 
-from views.main_window import MainWindow
-from views.group_page import GroupPage
-from views.classify_page import ClassifyPage
-from views.train_model_page import TrainModel
-from controllers.ml_controller import MLController
+from .views.main_window import MainWindow
+from .views.group_page import GroupPage
+from .views.classify_page import ClassifyPage
+from .views.train_model_page import TrainModel
+from .controllers.ml_controller import MLController
 
 def main():
     app = QApplication(sys.argv)
     
-    # Crear controlador primero
     ml_controller = MLController(None)
     
-    # Crear ventana principal
+
     main_window = MainWindow(ml_controller)
     ml_controller.view = main_window  # Conectar vista al controlador
     
-    # Crear páginas
+    
     home_widget = QWidget()
     layout = QVBoxLayout(home_widget)
     layout.setAlignment(Qt.AlignCenter)
 
-    # Logo
+
     logo_label = QLabel()
     logo_pixmap = QPixmap(r"D:\Documentos\TRABAJOS_YO\UAEH\Proyecto Doctora Rosa\INTERFAZ_v1\data\assets\view\logo_fondo.png")
     logo_pixmap = logo_pixmap.scaled(280, 280, Qt.KeepAspectRatio, Qt.SmoothTransformation)
     logo_label.setPixmap(logo_pixmap)
     logo_label.setAlignment(Qt.AlignCenter)
 
-    # Texto
+
     text_label = QLabel("Bienvenido 👋\nSelecciona una opción en el menú")
     text_label.setFont(QFont("Segoe UI Semibold", 14))
     text_label.setStyleSheet("color: white; background-color: transparent;")
@@ -66,4 +65,6 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
+    from data.models import embeddigns
+    _ = embeddigns.get_model()
     main()

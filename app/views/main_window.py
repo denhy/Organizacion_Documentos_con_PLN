@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap, QIcon
-from utils.styles import Styles
+from app.utils.styles import Styles
 
 class MainWindow(QWidget):
     def __init__(self, controller):
@@ -65,7 +65,7 @@ class MainWindow(QWidget):
 
         # Logo
         logo_label = QLabel()
-        logo_pixmap = QPixmap(r"..\data\assets\logo\logo.png")  # ruta relativa
+        logo_pixmap = QPixmap(r"data\assets\logo\logo.png")  # ruta relativa
         logo_pixmap = logo_pixmap.scaled(45, 45, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         logo_label.setPixmap(logo_pixmap)
         logo_label.setAlignment(Qt.AlignCenter)
@@ -100,10 +100,10 @@ class MainWindow(QWidget):
         font_menu = QFont("Segoe UI Semibold", 18, QFont.Bold)
         
 
-        icon_btnAgrupar = QIcon(r"..\data\assets\icons\icon_group.png")
-        icon_btnClasificar = QIcon(r"..\data\assets\icons\icon_classify.png")
-        icon_btnHome = QIcon(r"..\data\assets\icons\hogar.png")
-        icon_btnVer = QIcon(r"..\data\assets\icons\ver.png")
+        icon_btnAgrupar = QIcon(r"data\assets\icons\icon_group.png")
+        icon_btnClasificar = QIcon(r"data\assets\icons\icon_classify.png")
+        icon_btnHome = QIcon(r"data\assets\icons\hogar.png")
+        icon_btnVer = QIcon(r"data\assets\icons\ver.png")
         
         self.btn_home = QPushButton("Home")
         self.btn_home.setIcon(icon_btnHome)

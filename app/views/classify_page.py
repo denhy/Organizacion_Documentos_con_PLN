@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QProgressBar
 from PyQt5.QtGui import QFont 
-from utils.styles import Styles
+from app.utils.styles import Styles
 from PyQt5.QtCore import Qt
-from views.listDocumentWidget import DocumentListWidget
+from app.views.listDocumentWidget import DocumentListWidget
 
 class ClassifyPage(QWidget):
     def __init__(self, controller):

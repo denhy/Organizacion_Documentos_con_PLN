@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QTimer, Qt
-from utils.styles import Styles
-from views.listDocumentWidget import DocumentListWidget
+from app.utils.styles import Styles
+from app.views.listDocumentWidget import DocumentListWidget
 
 
 class TrainModel(QWidget):
