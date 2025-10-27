@@ -9,8 +9,10 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPixmap, QIcon, QFont, QCursor
 from app.utils.styles import Styles
 
+
 class DocumentListWidget(QWidget):
-    filesChanged = pyqtSignal(list)  
+    filesChanged = pyqtSignal(list)
+    clearClicked = pyqtSignal()       
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -30,6 +32,7 @@ class DocumentListWidget(QWidget):
         actions = QHBoxLayout()
         self.btn_add_files = QPushButton("Agregar archivos")
         self.btn_add_folder = QPushButton("Agregar carpeta")
+        
         for b in (self.btn_add_files, self.btn_add_folder):
             b.setStyleSheet(Styles.BUTTON_FILES)
             b.setFixedHeight(44) 
@@ -38,7 +41,15 @@ class DocumentListWidget(QWidget):
         self.btn_add_folder.clicked.connect(self._add_folder_dialog)
         actions.addWidget(self.btn_add_files)
         actions.addWidget(self.btn_add_folder)
-        actions.addStretch(1)
+        actions.addStretch(1) 
+         # Botón Limpiar (para resetear la página)
+        self.btn_clear = QPushButton("Limpiar")
+        
+        self.btn_clear.clicked.connect(self._on_click_clear)
+        self.btn_clear.setStyleSheet(Styles.BUTTON_FILES)
+        self.btn_clear.setFixedHeight(44) 
+        actions.addWidget(self.btn_clear)
+       
         root.addLayout(actions)
 
         # ---- lista ----
@@ -207,3 +218,16 @@ class DocumentListWidget(QWidget):
     def _list_double_click_event(self, event):
         # siempre permite agregar más (aunque ya haya elementos)
         self._add_files_dialog()
+        
+    def clear_files(self):
+        """Vacía la lista y emite filesChanged([]) si lo usas en tu señal."""
+        self.clear()
+        try:
+            self.filesChanged.emit([])
+        except Exception:
+            pass
+        
+    def _on_click_clear(self):
+        """Limpia SOLO la lista y avisa a la página con clearClicked."""
+        self.clear()               # vacía la lista y emite filesChanged([])
+        self.clearClicked.emit()

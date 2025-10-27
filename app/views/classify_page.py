@@ -20,6 +20,8 @@ class ClassifyPage(QWidget):
         self.setup_ui()
         self._wire_signals()
         self._load_models()
+        self.list_docs.filesChanged.connect(self._on_files_changed)   # ya lo tenías
+        self.list_docs.clearClicked.connect(self.clear_page)
 
     def setup_ui(self):
         layout = QVBoxLayout(self)
@@ -44,7 +46,8 @@ class ClassifyPage(QWidget):
         row.addWidget(self.cmb_models)
         row.addWidget(self.btn_refresh)
         row.addStretch(1)
-        layout.addLayout(row)
+        layout.addLayout(row) 
+        
 
         # ---- lista de documentos ----
         self.list_docs = DocumentListWidget()
@@ -53,9 +56,9 @@ class ClassifyPage(QWidget):
 
   
         self.btn_classify = QPushButton("Clasificar automáticamente")
-        self.btn_manual = QPushButton("Decidir carpeta manualmente")
+        #self.btn_manual = QPushButton("Decidir carpeta manualmente")
 
-        for btn in [self.btn_classify, self.btn_manual]:
+        for btn in [self.btn_classify]:
             btn.setStyleSheet(Styles.BUTTON_VIEWS)
             btn.setEnabled(False)
             btn.setFixedSize(280, 50)
@@ -145,4 +148,24 @@ class ClassifyPage(QWidget):
         else:
             # compat: por si viniera una cadena
             self.lbl.setText(str(out))
-  
+            
+    def clear_page(self):
+    # 1) La lista YA se vació por el widget
+        self.docs = []
+
+    
+        if hasattr(self, "btn_classify"):
+            self.btn_classify.setEnabled(False)
+
+        # 3) Reset progreso/estado
+        self.progress.setValue(0)
+        self.progress.hide()
+        self.lbl.setText("Clasificar documentos con un modelo entrenado")
+
+   
+
+        # 5) (Opcional) limpiar estado en el controlador
+        if hasattr(self.controller, "reset_state_for_train"):
+            self.controller.reset_state_for_train()
+            
+   

@@ -15,9 +15,9 @@ class MainWindow(QWidget):
         
     def setup_ui(self):
        
-        self.setStyleSheet("background-color: #282c34;")
+        self.setStyleSheet("background-color: #FFFFFF;")
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.resize(1000, 600)
+        self.resize(1000, 550)
         self.center_window()
 
 # ----------------- LAYOUT PRINCIPAL --------------------
@@ -92,7 +92,7 @@ class MainWindow(QWidget):
 # --------------------- PANEL LATERAL ----------------
         sidebar = QFrame()
         sidebar.setFixedWidth(200)
-        sidebar.setStyleSheet("background-color: #76749c; color: white;")
+        sidebar.setStyleSheet("background-color: #6ACFC7; color: white;")
         sidebar_layout = QVBoxLayout(sidebar)
         
         # Botones menú
@@ -106,19 +106,20 @@ class MainWindow(QWidget):
         icon_btnVer = QIcon(r"data\assets\icons\ver.png")
         
         self.btn_home = QPushButton("Home")
-        self.btn_home.setIcon(icon_btnHome)
+        #self.btn_home.setIcon(icon_btnHome)
          
         self.btn_group = QPushButton("Agrupar")
-        self.btn_group.setIcon(icon_btnAgrupar)    
+        #self.btn_group.setIcon(icon_btnAgrupar)    
         
         self.btn_classify = QPushButton("Clasificar")
-        self.btn_classify.setIcon(icon_btnClasificar)
+        #self.btn_classify.setIcon(icon_btnClasificar)
        
         self.btn_train = QPushButton("Entrenar Modelo")
         #self.btn_train.setIcon(icon_btnClasificar)
         
         self.btn_models_overview = QPushButton("Ver modelos")
-        self.btn_models_overview.setIcon(icon_btnVer)
+        #self.btn_models_overview.setIcon(icon_btnVer)
+        
        
 
         for btn in [self.btn_home, self.btn_group, self.btn_classify, self.btn_train, self.btn_models_overview]:

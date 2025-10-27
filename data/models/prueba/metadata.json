@@ -1,8 +1,8 @@
 {
   "num_docs": 14,
   "classes": [
-    "EGEL",
-    "PRACTICAS PROFESIONALES"
+    "DOCS_PRUEBAS",
+    "REFERENCIAS"
   ],
   "metrics": {
     "accuracy": 1.0,

@@ -39,7 +39,7 @@ def main():
 
     text_label = QLabel("Bienvenido 👋\nSelecciona una opción en el menú")
     text_label.setFont(QFont("Segoe UI Semibold", 14))
-    text_label.setStyleSheet("color: white; background-color: transparent;")
+    text_label.setStyleSheet("color: #6ACFC7; background-color: transparent;")
     text_label.setAlignment(Qt.AlignCenter)
 
     layout.addWidget(logo_label)
@@ -49,7 +49,10 @@ def main():
     group_page = GroupPage(ml_controller)
     classify_page = ClassifyPage(ml_controller)
     train_page = TrainPage(ml_controller)
-    models_overview = ModelResultsPage()
+    models_overview = ModelResultsPage() 
+
+ 
+
     
     # Agregar páginas al stack
     main_window.add_page(home_widget, 0)
@@ -57,6 +60,7 @@ def main():
     main_window.add_page(classify_page, 2)
     main_window.add_page(train_page, 3)
     main_window.add_page(models_overview, 4)
+  
     
     # Conectar botones del menú
     main_window.btn_home.clicked.connect(lambda: main_window.set_current_page(0))
@@ -64,6 +68,7 @@ def main():
     main_window.btn_classify.clicked.connect(lambda: main_window.set_current_page(2))
     main_window.btn_train.clicked.connect(lambda: main_window.set_current_page(3))
     main_window.btn_models_overview.clicked.connect(lambda: main_window.set_current_page(4))
+   
     
     main_window.show()
     sys.exit(app.exec_())
